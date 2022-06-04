@@ -2,13 +2,17 @@ package com.rht.springcloud.controller;
 
 import com.rht.springcloud.entities.CommonResult;
 import com.rht.springcloud.entities.Payment;
+import com.rht.springcloud.lb.MyLB;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.URI;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -20,6 +24,19 @@ public class OrderController {
     private RestTemplate restTemplate;
     @Resource
     private DiscoveryClient discoveryClient;
+    @Resource
+    private MyLB myLB;
+
+    @GetMapping(value = "/consumer/payment/lb")
+    public String getPaymentLB() {
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        if (instances == null || instances.size() <= 0) {
+            return null;
+        }
+        ServiceInstance serviceInstance = myLB.instances(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(uri + "/payment/lb", String.class);
+    }
 
     @PostMapping("/consumer/payment/add")
     public CommonResult<Payment> create(Payment payment){
