@@ -25,3 +25,6 @@ eureka:
       #设置与Eureka Server交互的地址 查询服务和注册服务都需要依赖这个地址
       #defaultZone: http://localhost:7001/eureka/
       defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+  instance:
+    instance-id: consumer80
+    prefer-ip-address: true   # 访问路径可以显示IP地址
