@@ -21,4 +21,10 @@ public class OrderFeginController {
         return paymentFeginService.select(id);
     }
 
+    @GetMapping(value = "/consumer/payment/fegin/timeout")
+    public String paymentFeginTimeOut(){
+        //openfegin-ribbon一般默认等待1秒钟
+        return paymentFeginService.paymentFeginTimeOut();
+    }
+
 }
