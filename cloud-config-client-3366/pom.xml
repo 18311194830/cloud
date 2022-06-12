@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cloud-config-client-3355</artifactId>
+    <artifactId>cloud-config-client-3366</artifactId>
 
-    <name>cloud-config-client-3355</name>
+    <name>cloud-config-client-3366</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +20,7 @@
     </properties>
 
     <dependencies>
-        <!--添加消息总线RabbitNQ支持-->
+        <!--添加消息总线RabbitMQ支持-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
