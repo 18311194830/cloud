@@ -5,6 +5,7 @@ import com.rht.springcloud.alibaba.domain.Order;
 import com.rht.springcloud.alibaba.service.AccountService;
 import com.rht.springcloud.alibaba.service.OrderService;
 import com.rht.springcloud.alibaba.service.StorageService;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService
      * 简单说：下订单->扣库存->减余额->改状态
      */
     @Override
-    //@GlobalTransactional(name = "fsp-create-order",rollbackFor = Exception.class)
+    @GlobalTransactional(name = "rht-create-order",rollbackFor = Exception.class)
     public void create(Order order)
     {
         log.info("----->开始新建订单");
